@@ -7,10 +7,11 @@ app = Flask(__name__)
 
 
 class Film(object):
-    def __init__(self, name, url, genres):
+    def __init__(self, name, url, genres, poster):
         self.name = name
         self.url = url
         self.genres = ', '.join(genres)
+        self.poster = poster
 
 
 class ExternalURLCol(Col):
@@ -49,9 +50,13 @@ def catalogue():
 @app.route("/")
 def index():
     # film_url = "rtmp://35.189.221.9:1935/vod/" + "BigBuckBunny_512kb.mp4"
-    film_url = "rtmp://35.195.155.247:1935/vod2/" + "bbb.mp4"
+    # film_url = "rtmp://35.195.155.247:1935/vod2/" + "bbb.mp4"
+    # film_type = "rtmp/mp4"
+    film_url = "static/mp4s/" + "BigBuckBunny.mp4"
+    film_type = "video/mp4"
+
     poster = "static/posters/BigBuckBunny-pic.png"
-    return render_template('video_player.html', film_url=film_url, poster=poster)
+    return render_template('video_player.html', film_url=film_url, poster=poster, film_type=film_type)
 
 
 if __name__ == "__main__":

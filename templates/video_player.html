@@ -1,7 +1,9 @@
 {% extends "layout.html" %}
-{% block body %}
-<video width="400" controls poster="{{poster}}">
-  <source src="{{film_url}}" type="rtmp/mp4">
+{% block main_body %}
+{#<video width="400" controls poster="{{poster}}">#}
+<video id="my_video_1" class="video-js vjs-default-skin" width="640px" controls preload="none"
+       poster="{{poster}}" data-setup="{§ }">
+    <source src="{{film_url}}" type="{{ film_type }}">
 </video>
 
 {% endblock %}
