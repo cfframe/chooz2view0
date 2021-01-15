@@ -29,15 +29,16 @@ class FilmTable(Table):
     genres = Col('genres')
 
 
-@app.route("/")
-def index():
+@app.route("/catalogue")
+def catalogue():
     #video_path = "C:\\Users\\cffra\\OneDrive - University of Dundee\\" +\
     #             "Documents\\AC51041 DevOps and Microservices\\Assign - Microservices\\Films\\Films orig\\"
     video_path = "rtmp://35.195.155.247:1935/vod2/"
-    films = [Film("Big Buck Bunny", video_path + "BigBuckBunny_512kb.mp4", ["comedy", "animation"]),
-             Film("Elephant Dreams", video_path + "ed_1024_512kb.mp4", ["fantasy"]),
-             Film("Sintel", video_path + "sintel-2048-surround.mp4", ["fantasy", "adventure"])
-             ]
+    films = [
+        Film("Big Buck Bunny", video_path + "BigBuckBunny_512kb.mp4", ["comedy", "animation"], "BigBuckBunny-pic.png"),
+        Film("Elephant Dreams", video_path + "ed_1024_512kb.mp4", ["fantasy"], "ElephantsDream-pic.png"),
+        Film("Sintel", video_path + "sintel-2048-surround.mp4", ["fantasy", "adventure"], "Sintel-pic.png")
+        ]
 
     film_list = FilmTable(films)
 
@@ -45,12 +46,13 @@ def index():
     return render_template('catalogue.html', film_list=film_list)
 
 
-@app.route("/play/")
-def play():
+@app.route("/")
+def index():
     # film_url = "rtmp://35.189.221.9:1935/vod/" + "BigBuckBunny_512kb.mp4"
     film_url = "rtmp://35.195.155.247:1935/vod2/" + "bbb.mp4"
-    return render_template('video_player.html', film_url=film_url)
+    poster = "static/posters/BigBuckBunny-pic.png"
+    return render_template('video_player.html', film_url=film_url, poster=poster)
 
 
 if __name__ == "__main__":
-    app.run(host='127.0.0.1', port=80)
+    app.run()
